@@ -10,8 +10,8 @@ canvas.style.display = 'block';
 canvas.style.margin = '0 auto';
 
 const ballRadius = 15;
-let x = canvas.width / 2;
-let y = canvas.height - 50;
+let x = Math.random() * (canvas.width - ballRadius * 2) + ballRadius; // Random x-coordinate
+let y = canvas.height - 50; // Fixed y-coordinate
 let dx = 2; // Initial speed along x-axis
 let dy = -2; // Initial speed along y-axis
 
@@ -88,8 +88,8 @@ function draw() {
                 alert('Game Over');
                 document.location.reload();
             } else {
-                x = canvas.width / 2;
-                y = canvas.height - 50;
+                x = Math.random() * (canvas.width - ballRadius * 2) + ballRadius; // Random x-coordinate
+                y = canvas.height - 50; // Fixed y-coordinate
                 dx = 2;
                 dy = -2;
                 paddleX = (canvas.width - paddleWidth) / 2;
