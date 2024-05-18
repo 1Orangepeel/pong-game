@@ -5,6 +5,10 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1000;
 canvas.height = 800;
 
+// Center the canvas horizontally on the page
+canvas.style.display = 'block';
+canvas.style.margin = '0 auto';
+
 const ballRadius = 15;
 let x = canvas.width / 2;
 let y = canvas.height - 50;
@@ -92,8 +96,5 @@ function draw() {
     y += dy;
     requestAnimationFrame(draw);
 }
-
-// Center the canvas horizontally on the page
-canvas.style.margin = '0 auto';
 
 draw();
