@@ -20,6 +20,7 @@ let paddleWidth = 120; // Increase paddle width
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 let score = 0;
+let lives = 3; // Number of lives
 
 document.addEventListener('mousemove', mouseMoveHandler);
 
@@ -52,11 +53,18 @@ function drawScore() {
     ctx.fillText('Score: ' + score, 8, 20);
 }
 
+function drawLives() {
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#fff';
+    ctx.fillText('Lives: ' + lives, canvas.width - 65, 20);
+}
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
     drawScore();
+    drawLives();
 
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
@@ -68,14 +76,24 @@ function draw() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
             score++; // Increase score when ball hits paddle
-            
-            // Speed up the ball based on score (every 7 points)
+
+            // Speed up the ball based on score (every 5 points)
             if (score % 5 === 0) {
                 dx = (dx > 0 ? dx + .75 : dx - .75);
                 dy = (dy > 0 ? dy + .75 : dy - .75);
             }
         } else {
-            document.location.reload();
+            lives--; // Decrease lives when ball hits the bottom
+            if (!lives) {
+                alert('Game Over');
+                document.location.reload();
+            } else {
+                x = canvas.width / 2;
+                y = canvas.height - 50;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+            }
         }
     }
 
@@ -85,31 +103,3 @@ function draw() {
 }
 
 draw();
-
-const scoreboard = document.getElementById('scoreboard');
-const playerNameInput = document.getElementById('playerNameInput');
-const submitScoreBtn = document.getElementById('submitScoreBtn');
-
-const scores = [];
-
-function updateScoreboard() {
-    scoreboard.innerHTML = '';
-    scores.sort((a, b) => b.score - a.score); // Sort scores in descending order
-
-    scores.forEach((entry, index) => {
-        const scoreEntry = document.createElement('li');
-        scoreEntry.textContent = `${index + 1}. ${entry.name}: ${entry.score}`;
-        scoreboard.appendChild(scoreEntry);
-    });
-}
-
-submitScoreBtn.addEventListener('click', () => {
-    const playerName = playerNameInput.value.trim();
-    if (playerName !== '') {
-        scores.push({ name: playerName, score });
-        updateScoreboard();
-        playerNameInput.value = ''; // Clear input field after submitting
-    }
-});
-
-updateScoreboard();
