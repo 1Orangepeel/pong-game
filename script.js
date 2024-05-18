@@ -1,6 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+// Adjust canvas size
 canvas.width = 1000;
 canvas.height = 800;
 
@@ -91,5 +92,8 @@ function draw() {
     y += dy;
     requestAnimationFrame(draw);
 }
+
+// Center the canvas horizontally on the page
+canvas.style.margin = '0 auto';
 
 draw();
