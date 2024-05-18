@@ -12,8 +12,8 @@ canvas.style.margin = '0 auto';
 const ballRadius = 15;
 let x = canvas.width / 2;
 let y = canvas.height - 50;
-let dx = getRandomSpeed(); // Random initial speed along x-axis
-let dy = getRandomSpeed(); // Random initial speed along y-axis
+let dx = 2; // Initial speed along x-axis
+let dy = -2; // Initial speed along y-axis
 
 const paddleHeight = 15;
 const paddleWidth = 100;
@@ -81,6 +81,10 @@ function draw() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
             score++; // Increase score when ball hits paddle
+            
+            // Speed up the ball based on score
+            dx = (dx > 0 ? dx + 0.5 : dx - 0.5);
+            dy = (dy > 0 ? dy + 0.5 : dy - 0.5);
         } else {
             document.location.reload();
         }
@@ -95,11 +99,6 @@ function draw() {
     x += dx;
     y += dy;
     requestAnimationFrame(draw);
-}
-
-function getRandomSpeed() {
-    // Returns a random number between -5 and 5 (inclusive)
-    return Math.floor(Math.random() * 11) - 5;
 }
 
 draw();
