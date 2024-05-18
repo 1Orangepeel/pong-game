@@ -83,8 +83,8 @@ function draw() {
             score++; // Increase score when ball hits paddle
             
             // Speed up the ball based on score
-            dx = (dx > 0 ? dx + 0.5 : dx - 0.5);
-            dy = (dy > 0 ? dy + 0.5 : dy - 0.5);
+            dx = (dx > 0 ? dx + 1.5 : dx - 1.5);
+            dy = (dy > 0 ? dy + 1.5: dy - 1.5);
         } else {
             document.location.reload();
         }
