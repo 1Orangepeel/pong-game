@@ -70,9 +70,9 @@ function draw() {
             score++; // Increase score when ball hits paddle
             
             // Speed up the ball based on score (every 7 points)
-            if (score % 7 === 0) {
-                dx = (dx > 0 ? dx + 1 : dx - 1);
-                dy = (dy > 0 ? dy + 1 : dy - 1);
+            if (score % 5 === 0) {
+                dx = (dx > 0 ? dx + .75 : dx - .75);
+                dy = (dy > 0 ? dy + .75 : dy - .75);
             }
         } else {
             document.location.reload();
