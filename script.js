@@ -1,18 +1,23 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-const ballRadius = 10;
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
+canvas.width = 800;
+canvas.height = 600;
 
-const paddleHeight = 10;
-const paddleWidth = 75;
+const ballRadius = 15;
+let x = canvas.width / 2;
+let y = canvas.height - 50;
+let dx = 3;
+let dy = -3;
+
+const paddleHeight = 15;
+const paddleWidth = 100;
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
+
+let score = 0;
 
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
@@ -49,10 +54,17 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+function drawScore() {
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#fff';
+    ctx.fillText('Score: ' + score, 8, 20);
+}
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
+    drawScore();
 
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
@@ -63,6 +75,7 @@ function draw() {
     } else if (y + dy > canvas.height - ballRadius) {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
+            score++; // Increase score when ball hits paddle
         } else {
             document.location.reload();
         }
