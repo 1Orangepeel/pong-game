@@ -15,7 +15,7 @@ let balls = []; // Array to store multiple balls
 balls.push(createBall(canvas.width / 2, canvas.height - 50, initialBallSpeed, -initialBallSpeed)); // Initial ball
 
 const paddleHeight = 15;
-const paddleWidth = 100;
+const paddleWidth = 150;
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
