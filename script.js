@@ -85,3 +85,31 @@ function draw() {
 }
 
 draw();
+
+const scoreboard = document.getElementById('scoreboard');
+const playerNameInput = document.getElementById('playerNameInput');
+const submitScoreBtn = document.getElementById('submitScoreBtn');
+
+const scores = [];
+
+function updateScoreboard() {
+    scoreboard.innerHTML = '';
+    scores.sort((a, b) => b.score - a.score); // Sort scores in descending order
+
+    scores.forEach((entry, index) => {
+        const scoreEntry = document.createElement('li');
+        scoreEntry.textContent = `${index + 1}. ${entry.name}: ${entry.score}`;
+        scoreboard.appendChild(scoreEntry);
+    });
+}
+
+submitScoreBtn.addEventListener('click', () => {
+    const playerName = playerNameInput.value.trim();
+    if (playerName !== '') {
+        scores.push({ name: playerName, score });
+        updateScoreboard();
+        playerNameInput.value = ''; // Clear input field after submitting
+    }
+});
+
+updateScoreboard();
